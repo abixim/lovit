@@ -1,371 +1,553 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-  <meta charset="UTF-8">
-  <title>lovelovelove!!!</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    body {
-      margin: 0;
-      background: linear-gradient(135deg, #ffd6e6, #ffe6f0);
-      background-size: 400% 400%;
-      animation: backgroundGradient 20s ease infinite;
-      color: #4a0033;
-      font-family: Arial, sans-serif;
-      font-size: 14px;
-      font-weight: bold;
-      font-style: italic;
-      text-align: center;
-      overflow-x: hidden;
-      position: relative;
-      transition: background 1s ease, color 0.5s ease;
-    }
+    <meta charset="UTF-8">
+    <title>lovelovelove!!!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            margin: 0;
+            background: linear-gradient(135deg, #ffd6e6, #ffe6f0);
+            background-size: 400% 400%;
+            animation: backgroundGradient 20s ease infinite;
+            color: #4a0033;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            font-weight: bold;
+            font-style: italic;
+            text-align: center;
+            overflow-x: hidden;
+            position: relative;
+            transition: background 1s ease, color 0.5s ease;
+        }
 
-    @keyframes backgroundGradient {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
+        @keyframes backgroundGradient {
+            0% {
+                background-position: 0% 50%;
+            }
 
-    .bienvenida {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: #ffe6f0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      z-index: 999;
-      animation: fadeInText 2s ease;
-    }
+            50% {
+                background-position: 100% 50%;
+            }
 
-    .bienvenida h1 {
-      font-size: 2em;
-      margin-bottom: 20px;
-    }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
 
-    .btn-loviu {
-      padding: 12px 24px;
-      font-size: 1.2em;
-      border: none;
-      border-radius: 30px;
-      background-color: #ff66a3;
-      color: white;
-      cursor: pointer;
-      font-style: italic;
-      font-weight: bold;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-      transition: transform 0.3s ease, background-color 0.3s ease;
-    }
+        .bienvenida {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #ffe6f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            z-index: 999;
+            animation: fadeInText 2s ease;
+        }
 
-    .btn-loviu:hover {
-      transform: scale(1.1);
-      background-color: #ff3385;
-    }
+        .bienvenida h1 {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
 
-    .contenido {
-      display: none;
-      animation: fadeInText 2s ease;
-    }
+        .btn-loviu {
+            padding: 12px 24px;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 30px;
+            background-color: #ff66a3;
+            color: white;
+            cursor: pointer;
+            font-style: italic;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
 
-    @keyframes fadeInText {
-      from { opacity: 0; transform: translateY(-20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+        .btn-loviu:hover {
+            transform: scale(1.1);
+            background-color: #ff3385;
+        }
 
-    .mensaje, .mensaje-final {
-      padding: 30px 20px 10px;
-      max-width: 800px;
-      margin: 0 auto;
-      z-index: 2;
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 1s ease, transform 1s ease;
-    }
+        .contenido {
+            display: none;
+            animation: fadeInText 2s ease;
+        }
 
-    .mensaje.visible, .mensaje-final.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
+        @keyframes fadeInText {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
 
-    .mensaje-final {
-      margin-bottom: 80px;
-    }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
-    .collage {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      align-items: center;
-      gap: 15px;
-      padding: 20px;
-      z-index: 2;
-    }
+        .mensaje,
+        .mensaje-final {
+            padding: 30px 20px 10px;
+            max-width: 800px;
+            margin: 0 auto;
+            z-index: 2;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1s ease, transform 1s ease;
+        }
 
-    .collage img {
-      width: 300px;
-      max-width: 90%;
-      height: auto;
-      object-fit: cover;
-      border-radius: 12px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 1s ease, transform 1s ease;
-    }
+        .mensaje.visible,
+        .mensaje-final.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
 
-    .collage img.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
+        .mensaje-final {
+            margin-bottom: 80px;
+        }
 
-    .collage img:hover {
-      transform: scale(1.05);
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
-    }
+        .collage {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            padding: 20px;
+            z-index: 2;
+        }
 
-    .heart {
-      position: fixed;
-      top: 100%;
-      color: #ff3366;
-      font-size: 20px;
-      animation: floatHeart 10s linear infinite;
-      opacity: 0.8;
-      z-index: 1;
-    }
+        .collage img {
+            width: 300px;
+            max-width: 90%;
+            height: auto;
+            object-fit: cover;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 1s ease, transform 1s ease;
+        }
 
-    @keyframes floatHeart {
-      0% {
-        transform: translateY(0) translateX(0) rotate(0deg);
-        opacity: 1;
-      }
-      100% {
-        transform: translateY(-120vh) translateX(-30px) rotate(360deg);
-        opacity: 0;
-      }
-    }
+        .collage img.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
 
-    .mensaje-frase {
-      text-align: center;
-      font-size: 1.5em;
-      margin: 20px 0;
-      font-style: italic;
-      font-weight: bold;
-      color: #4a0033;
-      display: block;
-      width: 100%;
-      justify-content: center;
-    }
+        .collage img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+        }
 
-    #mensaje-sorpresa {
-      display: none;
-      margin-top: 20px;
-      font-size: 1.2em;
-      opacity: 0;
-      transition: opacity 1s ease;
-      text-align: center;
-    }
+        .heart {
+            position: fixed;
+            top: 100%;
+            color: #ff3366;
+            font-size: 20px;
+            animation: floatHeart 10s linear infinite;
+            opacity: 0.8;
+            z-index: 1;
+        }
 
-    #mensaje-sorpresa img {
-      width: 80%;
-      max-width: 400px;
-      height: auto;
-      border-radius: 10px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-      margin-bottom: 20px;
-    }
+        @keyframes floatHeart {
+            0% {
+                transform: translateY(0) translateX(0) rotate(0deg);
+                opacity: 1;
+            }
 
-    .btn-corazon {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background-color: #ff66a3;
-      color: white;
-      font-size: 28px;
-      border-radius: 50%;
-      padding: 12px 16px;
-      text-decoration: none;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-      transition: transform 0.3s ease, background-color 0.3s ease;
-      z-index: 1000;
-      display: none;
-    }
+            100% {
+                transform: translateY(-120vh) translateX(-30px) rotate(360deg);
+                opacity: 0;
+            }
+        }
 
-    .btn-corazon:hover {
-      transform: scale(1.2);
-      background-color: #ff3385;
-    }
+        .mensaje-frase {
+            text-align: center;
+            font-size: 1.5em;
+            margin: 20px 0;
+            font-style: italic;
+            font-weight: bold;
+            color: #4a0033;
+            display: block;
+            width: 100%;
+            justify-content: center;
+        }
 
-    @media (max-width: 600px) {
-      .mensaje, .mensaje-final {
-        padding: 20px 15px;
-        font-size: 13px;
-      }
+        #mensaje-sorpresa {
+            display: none;
+            margin-top: 20px;
+            font-size: 1.2em;
+            opacity: 0;
+            transition: opacity 1s ease;
+            text-align: center;
+        }
 
-      .collage {
-        flex-direction: column;
-        gap: 10px;
-      }
+        #mensaje-sorpresa img {
+            width: 48%;
+            max-width: 400px;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            margin-bottom: 20px;
+            display: inline-block;
+        }
 
-      .collage img {
-        width: 90%;
-      }
+        .btn-corazon {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #ff66a3;
+            color: white;
+            font-size: 28px;
+            border-radius: 50%;
+            padding: 12px 16px;
+            text-decoration: none;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            z-index: 1000;
+            display: none;
+            /* Inicialmente oculto */
+        }
 
-      .mensaje-final {
-        margin-bottom: 100px;
-      }
-    }
-  </style>
+        .btn-corazon:hover {
+            transform: scale(1.2);
+            background-color: #ff3385;
+        }
+
+        /* Estilos para el modal */
+        .modal {
+            display: none;
+            /* Hidden by default */
+            position: fixed;
+            /* Stay in place */
+            z-index: 1001;
+            /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%;
+            /* Full width */
+            height: 100%;
+            /* Full height */
+            overflow: auto;
+            /* Enable scroll if needed */
+            background-color: rgba(0, 0, 0, 0.4);
+            /* Black w/ opacity */
+            /* Nuevos estilos para el color y la animación */
+            background: linear-gradient(135deg, #ffd6e6, #ffe6f0);
+            animation: fadeIn 1s ease, backgroundGradient 20s ease infinite;
+        }
+
+        .modal-content {
+            background-color: transparent;
+            /* El contenido del modal será transparente */
+            margin: 15% auto;
+            /* 15% from the top and centered */
+            padding: 20px;
+            border: none;
+            /* Sin borde */
+            width: 80%;
+            /* Could be 80% or whatever you want */
+            max-height: 80%;
+            overflow: auto;
+            position: relative;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .close {
+            color: #aaa;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .modal-collage {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            /* padding: 20px;  Eliminado para que el collage se pegue al borde del modal */
+        }
+
+        .modal-collage img {
+            max-width: 300px;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        @media (max-width: 600px) {
+
+            .mensaje,
+            .mensaje-final {
+                padding: 20px 15px;
+                font-size: 13px;
+            }
+
+            .collage {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .collage img {
+                width: 90%;
+            }
+
+            .mensaje-final {
+                margin-bottom: 100px;
+            }
+        }
+    </style>
 </head>
+
 <body>
 
-  <!-- Pantalla de bienvenida -->
-  <div class="bienvenida" id="bienvenida">
-    <h1>olii</h1>
-    <button class="btn-loviu" onclick="mostrarContenido()">loviu^^</button>
-  </div>
-
-  <!-- Botón corazón -->
-  <a class="btn-corazon" id="btn-corazon" onclick="mostrarCollageExtra()">❤️</a>
-
-  <!-- Contenido principal -->
-  <div class="contenido" id="contenido">
-    <div class="mensaje">
-      Todas las canciones de este álbum tan hermoso me hacen recordarte, pensar en ti y saber la manera tan especial en la que te amo y como me haces sentir.  
-      Cada canción es una carta al amor, cada canción es linda y transmite un lindo mensaje.  
-      Te amo tanto mi bella, espero lo disfrutes.  
-      <br><br>
-      Hace que recuerde cada momento bello que hemos compartido juntos, cada día, cada abrazo, cada beso.  
-      Todo lo lindo que hemos hecho juntos y así como también hemos pasado momentos hermosos en su mayoría, también hemos pasado momentos difíciles.  
-      Más sin embargo, siempre superamos las cosas juntos porque de eso se trata.  
-      Nos faltan tantas cosas por hacer, tantas cosas planeadas por cumplir.  
-      Sos lo más lindo que la vida y Dios pudo poner en mi camino.  
-      Te amo infinitamente, mi bella &lt;3  
-      <br><br>
-      GIRL, I'M SO IN LOVE WITH YOU &hearts;
+    <div class="bienvenida" id="bienvenida">
+        <h1>olii</h1>
+        <button class="btn-loviu" onclick="mostrarContenido()">loviu^^</button>
     </div>
 
-    <div class="collage">
-      <img src="IMG_2701.JPEG" alt="Foto 1">
-      <img src="IMG_2706.JPEG" alt="Foto 2">
-      <img src="IMG_2954.JPEG" alt="Foto 3">
-      <img src="IMG_3479.JPEG" alt="Foto 4">
-      <img src="IMG_4052.JPEG" alt="Foto 5">
-      <img src="IMG_4062.JPEG" alt="Foto 6">
-      <img src="IMG_3729.JPEG" alt="Foto 7">
-      <div class="mensaje-frase">
-        YOU REMIND ME OF THE COLOR BLUE^^
-      </div>
-      <img src="IMG_4468.JPEG" alt="Foto 8">
-      <img src="IMG_5042.JPEG" alt="Foto 9">
-      <img src="IMG_4475.JPEG" alt="Foto 10">
-      <img src="IMG_0733.JPEG" alt="foto 11">
-      <img src="IMG_1215.JPEG" alt="foto 12">
-      <img src="IMG_1271.JPEG" alt="foto 13">
-      <img src="IMG_1804.JPEG" alt="foto 14">
-    </div>
+    <a class="btn-corazon" id="btn-corazon" onclick="mostrarModalCollage()">❤️</a>
 
-    <!-- Collage Extra (oculto inicialmente) -->
-    <div id="collage-extra" class="collage" style="display:none;">
-      <img src="IMG_1020.jpeg" alt="Extra 1">
-      <img src="IMG_1021.jpeg" alt="Extra 2">
-      <img src="IMG_1022.jpeg" alt="Extra 3">
-      <img src="IMG_1023.jpeg" alt="Extra 4">
-    </div>
-
-    <div class="mensaje-final">
-      Hay tantas historias, una distinta por cada foto.  
-      Cada canción un mensaje diferente, cada mensaje un sentimiento distinto y cada sentimiento es bello.  
-      Sos lo más lindo que puedo tener.  
-      Benditas mis manos que pueden tocarte, agradecidos mis ojos que pueden apreciar y admirar tu belleza que alegra mis días. 
-    <br><br>
-      Tantas cosas lindas que hemos hecho juntos, tantos momentos gratificantes y llenos de amor.  
-      La vida es bella cuando estoy junto a ti, haces que todo tenga sentido.  
-      Me haces estar cuerdo y me motivas a seguir adelante en todo.  
-      Sos la luz de mis ojos y la alegría de mis días. 
-      <br><br>
-
-      Te obsequio este este album tan hermoso que es uno de mis favirtos en la vida. Cada que escucho este album me hace pensar en ti y la manera tan especial y pura en la que te amo, cada canción es una carta, un mensaje al amor y aunque  yo siempre quiero demostrarte mi amor nunca puedo hacerlo de la mejor manera, este album me ayuda a poder expresar mis emociones y amor por ti, y aunque Mac de todas  las canciones que conforman este precioso album solo dedicó una a Ariana, yo te dedicaría cada una de las canciones que conforman este album, este album tan precioso e increible como tu, eres música y yo amo la música<3
-      <br><br>
-      GRACIAS POR TANTO Y PERDÓN POR TAN POCO, TE AMO INFINITAMENTE ♥
-      <br><br>
-      <button class="btn-loviu" onclick="mostrarSorpresa()">Toca aquí para ver algo kul jijijijij</button>
-      <div id="mensaje-sorpresa">
-        <div class="imagenes-lado-a-lado">
-          <img src="IMG_2721.JPEG" alt="foto 1">
-          <img src="IMG_2025.jpeg" alt="foto 2">
+    <div class="contenido" id="contenido">
+        <div class="mensaje">
+            Todas las canciones de este álbum tan hermoso me hacen recordarte, pensar en ti y saber la manera tan especial en la que te amo y como me haces sentir.
+            Cada canción es una carta al amor, cada canción es linda y transmite un lindo mensaje.
+            Te amo tanto mi bella, espero lo disfrutes.
+            <br><br>
+            Hace que recuerde cada momento bello que hemos compartido juntos, cada día, cada abrazo, cada beso.
+            Todo lo lindo que hemos hecho juntos y así como también hemos pasado momentos hermosos en su mayoría, también hemos pasado momentos difíciles.
+            Más sin embargo, siempre superamos las cosas juntos porque de eso se trata.
+            Nos faltan tantas cosas por hacer, tantas cosas planeadas por cumplir.
+            Sos lo más lindo que la vida y Dios pudo poner en mi camino.
+            Te amo infinitamente, mi bella &lt;3
+            <br><br>
+            GIRL, I'M SO IN LOVE WITH YOU &hearts;
         </div>
-       <br><br>
-        Sos el amor de mi vida.  
-        Estoy completamente seguro de que Dios te puso en mi camino por una razón,  
-        y no hay día que no agradezca por tenerte.    
-        ¡Gracias por existir, mi amol! &lt;3
-      </div>
+
+        <div class="collage">
+            <img src="IMG_2701.JPEG" alt="Foto 1">
+            <img src="IMG_2706.JPEG" alt="Foto 2">
+            <img src="IMG_2954.JPEG" alt="Foto 3">
+            <img src="IMG_3479.JPEG" alt="Foto 4">
+            <img src="IMG_4052.JPEG" alt="Foto 5">
+            <img src="IMG_4062.JPEG" alt="Foto 6">
+            <img src="IMG_3729.JPEG" alt="Foto 7">
+            <div class="mensaje-frase">
+                YOU REMIND ME OF THE COLOR BLUE^^
+            </div>
+            <img src="IMG_4468.JPEG" alt="Foto 8">
+            <img src="IMG_5042.JPEG" alt="Foto 9">
+            <img src="IMG_4475.JPEG" alt="Foto 10">
+            <img src="IMG_0733.JPEG" alt="foto 11">
+            <img src="IMG_1215.JPEG" alt="foto 12">
+            <img src="IMG_1271.JPEG" alt="foto 13">
+            <img src="IMG_1804.JPEG" alt="foto 14">
+        </div>
+
+        <div id="collage-extra" class="collage" style="display:none;">
+            <img src="IMG_1020.jpeg" alt="Extra 1">
+            <img src="IMG_1021.jpeg" alt="Extra 2">
+            <img src="IMG_1022.jpeg" alt="Extra 3">
+            <img src="IMG_1023.jpeg" alt="Extra 4">
+        </div>
+
+        <div class="mensaje-final">
+            Hay tantas historias, una distinta por cada foto.
+            Cada canción un mensaje diferente, cada mensaje un sentimiento distinto y cada sentimiento es bello.
+            Sos lo más lindo que puedo tener.
+            Benditas mis manos que pueden tocarte, agradecidos mis ojos que pueden apreciar y admirar tu belleza que alegra mis días.
+            <br><br>
+            Tantas cosas lindas que hemos hecho juntos, tantos momentos gratificantes y llenos de amor.
+            La vida es bella cuando estoy junto a ti, haces que todo tenga sentido.
+            Me haces estar cuerdo y me motivas a seguir adelante en todo.
+            Sos la luz de mis ojos y la alegría de mis días.
+            <br><br>
+
+            Te obsequio este este album tan hermoso que es uno de mis favirtos en la vida. Cada que escucho este album me hace pensar en ti y la manera tan especial y pura en la que te amo, cada canción es una carta, un mensaje al amor y aunque yo siempre quiero demostrarte mi amor nunca puedo hacerlo de la mejor manera, este album me ayuda a poder expresar mis emociones y amor por ti, y aunque Mac de todas las canciones que conforman este precioso album solo dedicó una a Ariana, yo te dedicaría cada una de las canciones que conforman este album, este album tan precioso e increible como tu, eres música y yo amo la música<3
+            <br><br>
+            GRACIAS POR TANTO Y PERDÓN POR TAN POCO, TE AMO INFINITAMENTE ♥
+            <br><br>
+            <button class="btn-loviu" onclick="mostrarSorpresa()">Toca aquí para ver algo kul jijijijij</button>
+            <div id="mensaje-sorpresa">
+                <div class="imagenes-lado-a-lado">
+                    <img src="IMG_2721.JPEG" alt="foto 1">
+                    <img src="IMG_2025.jpeg" alt="foto 2">
+                </div>
+                <br><br>
+                Sos el amor de mi vida.
+                Estoy completamente seguro de que Dios te puso en mi camino por una razón,
+                y no hay día que no agradezca por tenerte.
+                ¡Gracias por existir, mi amol! &lt;3
+            </div>
+        </div>
     </div>
-  </div>
 
-  <script>
-    // Función para mostrar el collage extra
-    function mostrarCollageExtra() {
-      const collage = document.getElementById("collage-extra");
-      if (collage.style.display === "none") {
-        collage.style.display = "flex";
-        collage.scrollIntoView({ behavior: "smooth" });
-      } else {
-        collage.style.display = "none";
-      }
-    }
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>¡NO ES LO QUE SIENTO POR TI, ES LO QUE NO SIENTO POR NADIE MÁS!❤️</h2>
+            <div class="modal-collage">
+                <img src="IMG_1020.jpeg" alt="Extra 1">
+                <img src="IMG_1021.jpeg" alt="Extra 2">
+                <img src="IMG_1022.jpeg" alt="Extra 3">
+                <img src="IMG_1023.jpeg" alt="Extra 4">
+            </div>
+        </div>
+    </div>
 
-    // Corazones flotantes
-    const createHeart = () => {
-      const heart = document.createElement("div");
-      heart.className = "heart";
-      heart.innerHTML = "❤️";
-      heart.style.left = Math.random() * 100 + "vw";
-      heart.style.fontSize = 12 + Math.random() * 24 + "px";
-      heart.style.animationDuration = (8 + Math.random() * 4) + "s";
-      document.body.appendChild(heart);
-      setTimeout(() => heart.remove(), 12000);
-    };
-    setInterval(createHeart, 500);
+    <script>
+        // Función para mostrar el collage extra como un modal
+        function mostrarModalCollage() {
+            const modal = document.getElementById("myModal");
+            if (!modal) {
+                console.error("No se encontró el elemento con ID 'myModal'");
+                return;
+            }
+            modal.style.display = "block";
 
-    // Mostrar contenido principal
-    function mostrarContenido() {
-      document.getElementById("bienvenida").style.display = "none";
-      document.getElementById("contenido").style.display = "block";
-      document.getElementById("btn-corazon").style.display = "inline-block";
+            // Cerrar el modal al hacer clic en la "x"
+            const closeBtn = document.querySelector('.close');
+            if (closeBtn) {
+                closeBtn.addEventListener('click', function () {
+                    modal.style.display = "none";
+                });
+            } else {
+                console.error("No se encontró el elemento con clase 'close'");
+            }
 
-      const audio = document.createElement('audio');
-      audio.src = "Mac Miller - Congratulations Instrumental (VIOLIN & PIANO) ❦ - b.mp3";
-      audio.loop = true;
-      audio.autoplay = true;
-      audio.style.display = "none";
-      document.body.appendChild(audio);
-      audio.play().catch(e => console.log("Audio bloqueado por el navegador:", e));
-    }
-
-    // Mostrar sorpresa final
-    function mostrarSorpresa() {
-      const sorpresa = document.getElementById("mensaje-sorpresa");
-      sorpresa.style.display = "block";
-      setTimeout(() => {
-        sorpresa.style.opacity = 1;
-      }, 10);
-    }
-
-    // Observador para animaciones
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
+            // Cerrar el modal al hacer clic fuera del contenido
+            window.onclick = function (event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            }
         }
-      });
-    }, { threshold: 0.1 });
 
-    document.querySelectorAll('.collage img, .mensaje, .mensaje-final').forEach(el => {
-      observer.observe(el);
-    });
-  </script>
+        // Corazones flotantes
+        function createHeart() {
+            const heart = document.createElement("div");
+            heart.className = "heart";
+            heart.innerHTML = "❤️";
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.fontSize = 12 + Math.random() * 24 + "px";
+            heart.style.animationDuration = (8 + Math.random() * 4) + "s";
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 12000);
+        };
+        setInterval(createHeart, 500);
+
+        // Función para mostrar el botón del corazón cuando se llega al final de la página
+        function mostrarBotonAlFinal() {
+            const alturaTotal = document.documentElement.scrollHeight;
+            const alturaVentana = document.documentElement.clientHeight;
+            const desplazamientoVertical = window.scrollY || window.pageYOffset;
+
+            // Ajustamos el valor restado para que aparezca un poco antes del final exacto (opcional)
+            if (desplazamientoVertical + alturaVentana >= alturaTotal - 100) {
+                const botonCorazon = document.getElementById("btn-corazon");
+                if (botonCorazon) {
+                    botonCorazon.style.display = "inline-block";
+                    window.removeEventListener('scroll', mostrarBotonAlFinal);
+                } else {
+                    console.error("No se encontró el elemento con ID 'btn-corazon'");
+                }
+            }
+        }
+
+        // Mostrar contenido principal
+        function mostrarContenido() {
+            const bienvenida = document.getElementById("bienvenida");
+            const contenido = document.getElementById("contenido");
+            const botonCorazon = document.getElementById("btn-corazon");
+
+
+            if (bienvenida) {
+                bienvenida.style.display = "none";
+            } else {
+                console.error("No se encontró el elemento con ID 'bienvenida'");
+                return; // Detener la función si no se encuentra el elemento principal
+            }
+
+            if (contenido) {
+                contenido.style.display = "block";
+            } else {
+                console.error("No se encontró el elemento con ID 'contenido'");
+                return; // Detener la función si no se encuentra el elemento principal
+            }
+
+
+            if (botonCorazon) {
+                botonCorazon.style.display = "none"; // Aseguramos que esté oculto al principio
+            }
+
+
+            const audio = document.createElement('audio');
+            audio.src = "Mac Miller - Congratulations Instrumental (VIOLIN & PIANO) ❦ - b.mp3";
+            audio.loop = true;
+            audio.autoplay = true;
+            audio.style.display = "none";
+            document.body.appendChild(audio);
+            audio.play().catch(e => console.log("Audio bloqueado por el navegador:", e));
+
+            // Escuchar el evento de scroll para mostrar el botón al final
+            window.addEventListener('scroll', mostrarBotonAlFinal);
+        }
+
+        // Mostrar sorpresa final
+        function mostrarSorpresa() {
+            const sorpresa = document.getElementById("mensaje-sorpresa");
+            if (sorpresa) {
+                sorpresa.style.display = "block";
+                setTimeout(() => {
+                    sorpresa.style.opacity = 1;
+                }, 10);
+            } else {
+                console.error("No se encontró el elemento con ID 'mensaje-sorpresa'");
+            }
+        }
+
+        // Observador para animaciones
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        const elementosObservados = document.querySelectorAll('.collage img, .mensaje, .mensaje-final');
+        elementosObservados.forEach(el => {
+            observer.observe(el);
+        });
+    </script>
 </body>
+
 </html>
