@@ -198,11 +198,15 @@
             display: inline-block;
         }
 
+        .botones-container {
+            width: 100%;
+            text-align: right;
+            margin-top: 20px;
+        }
+
         .btn-corazon,
         .btn-reproducir {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
+            display: inline-block;
             background-color: #ff66a3;
             color: white;
             font-size: 28px;
@@ -210,13 +214,11 @@
             padding: 12px 16px;
             text-decoration: none;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-            transition: transform 0.3s ease, background-color 0.3s ease, opacity 1s ease, transform 1s ease;
+            transition: transform 0.3s ease, background-color 0.3s ease;
             z-index: 1000;
-            opacity: 0;
-            transform: translateY(20px);
-            /* Inicialmente oculto y posicionado */
-            display: none;
-            /* Ocultar inicialmente */
+            position: absolute;
+            bottom: 20px;
+            right: 0;
         }
 
         .btn-corazon:hover,
@@ -226,13 +228,8 @@
         }
 
         .btn-reproducir {
+            margin-right: 10px;
             bottom: 90px;
-            /* Ajusta la posición del botón de reproducción */
-        }
-
-        .btn-visible {
-            opacity: 1;
-            transform: translateY(0);
         }
 
         /* Estilos para el modal */
@@ -336,11 +333,6 @@
             .mensaje-final {
                 margin-bottom: 100px;
             }
-
-            .btn-corazon,
-            .btn-reproducir {
-                display: none;
-            }
         }
     </style>
 </head>
@@ -352,8 +344,10 @@
         <button class="btn-loviu" onclick="mostrarContenido()">loviu^^</button>
     </div>
 
-    <a class="btn-corazon" id="btn-corazon" onclick="mostrarModalCollage()">❤️</a>
-    <div class="btn-reproducir" id="btn-reproducir" onclick="reproducirMusica()">🎶</div>
+    <div class="botones-container">
+        <a class="btn-corazon" id="btn-corazon" onclick="mostrarModalCollage()">❤️</a>
+        <a class="btn-reproducir" id="btn-reproducir" onclick="reproducirMusica()">🎶</a>
+    </div>
 
     <div class="contenido" id="contenido">
         <div class="mensaje">
