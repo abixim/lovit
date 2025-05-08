@@ -198,7 +198,8 @@
             display: inline-block;
         }
 
-        .btn-corazon {
+        .btn-corazon,
+        .btn-reproducir {
             position: fixed;
             bottom: 20px;
             right: 20px;
@@ -209,40 +210,27 @@
             padding: 12px 16px;
             text-decoration: none;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-            transition: transform 0.3s ease, background-color 0.3s ease;
+            transition: transform 0.3s ease, background-color 0.3s ease, opacity 1s ease, transform 1s ease;
             z-index: 1000;
-            display: none;
-            /* Inicialmente oculto */
+            opacity: 0;
+            transform: translateY(20px);
+            /* Inicialmente oculto y posicionado */
         }
 
-        .btn-corazon:hover {
+        .btn-corazon:hover,
+        .btn-reproducir:hover {
             transform: scale(1.2);
             background-color: #ff3385;
         }
 
-        /* Estilos para el botón de reproducción */
         .btn-reproducir {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background-color: #a366ff;
-            /* Otro color para diferenciarlo */
-            color: white;
-            font-size: 24px;
-            border-radius: 50%;
-            padding: 12px;
-            text-decoration: none;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-            transition: transform 0.3s ease, background-color 0.3s ease;
-            z-index: 1000;
-            cursor: pointer;
-            display: none;
-            /* Inicialmente oculto */
+            bottom: 80px;
+            /* Ajusta la posición del botón de reproducción */
         }
 
-        .btn-reproducir:hover {
-            transform: scale(1.2);
-            background-color: #8533ff;
+        .btn-visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         /* Estilos para el modal */
@@ -467,6 +455,7 @@
         // Variables globales
         let audio;
         let audioInicialmenteReproducido = false;
+        let botonesVisibles = false; // Control de la visibilidad de los botones
 
         // Función para mostrar el collage extra como un modal
         function mostrarModalCollage() {
@@ -516,13 +505,8 @@
 
             // Ajustamos el valor restado para que aparezca un poco antes del final exacto (opcional)
             if (desplazamientoVertical + alturaVentana >= alturaTotal - 100) {
-                const botonCorazon = document.getElementById("btn-corazon");
-                if (botonCorazon) {
-                    botonCorazon.style.display = "inline-block";
-                    window.removeEventListener('scroll', mostrarBotonAlFinal);
-                } else {
-                    console.error("No se encontró el elemento con ID 'btn-corazon'");
-                }
+                mostrarBotones();
+                window.removeEventListener('scroll', mostrarBotonAlFinal);
             }
         }
 
@@ -540,12 +524,32 @@
             }
         }
 
+        // Función para mostrar los botones con animación
+        function mostrarBotones() {
+            if (!botonesVisibles) {
+                const botonCorazon = document.getElementById("btn-corazon");
+                const botonReproducir = document.getElementById("btn-reproducir");
+
+                if (botonCorazon) {
+                    botonCorazon.classList.add('btn-visible');
+                } else {
+                    console.error("No se encontró el elemento con ID 'btn-corazon'");
+                }
+
+                if (botonReproducir) {
+                    botonReproducir.classList.add('btn-visible');
+                } else {
+                    console.error("No se encontró el elemento con ID 'btn-reproducir'");
+                }
+
+                botonesVisibles = true;
+            }
+        }
+
         // Función principal para mostrar el contenido
         function mostrarContenido() {
             const bienvenida = document.getElementById("bienvenida");
             const contenido = document.getElementById("contenido");
-            const botonCorazon = document.getElementById("btn-corazon");
-            const botonReproducir = document.getElementById("btn-reproducir");
 
             console.log("Función mostrarContenido() llamada.");
 
@@ -567,28 +571,13 @@
                 return;
             }
 
-            // Ocultar el botón de corazón inicialmente
-            if (botonCorazon) {
-                botonCorazon.style.display = "none";
-                console.log("Botón de corazón inicialmente oculto.");
-            }
-
-            // Mostrar el botón de reproducción
-            if (botonReproducir) {
-                botonReproducir.style.display = "inline-block";
-                console.log("Botón de reproducir música mostrado.");
-            } else {
-                console.error("No se encontró el elemento con ID 'btn-reproducir'");
-            }
-
-            // Crear y configurar el elemento de audio
+            // Crear y configurar el elemento de audio y reproducir automáticamente
             audio = document.createElement('audio');
             audio.src = "Mac Miller - Congratulations Instrumental (VIOLIN & PIANO) ❦ - b.mp3";
             audio.loop = true;
             audio.style.display = "none";
             document.body.appendChild(audio);
 
-            // Intentar reproducir la música después de que se cargue
             audio.addEventListener('loadeddata', () => {
                 audio.play()
                     .then(() => {
@@ -598,7 +587,14 @@
                     .catch(error => console.error("Error al reproducir audio:", error));
             });
 
-            // Mostrar el botón de corazón al final del contenido
+            audio.addEventListener('error', (error) => {
+                console.error("Error al cargar el audio:", error);
+            });
+
+            // Mostrar los botones después de un pequeño retraso
+            setTimeout(mostrarBotones, 1000); // 1 segundo de retraso
+
+            // Escuchar el evento de scroll para mostrar el botón al final
             window.addEventListener('scroll', mostrarBotonAlFinal);
             console.log("EventListener para scroll agregado.");
         }
