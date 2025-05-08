@@ -215,6 +215,8 @@
             opacity: 0;
             transform: translateY(20px);
             /* Inicialmente oculto y posicionado */
+            display: none;
+            /* Ocultar inicialmente */
         }
 
         .btn-corazon:hover,
@@ -224,7 +226,7 @@
         }
 
         .btn-reproducir {
-            bottom: 80px;
+            bottom: 90px;
             /* Ajusta la posición del botón de reproducción */
         }
 
@@ -531,13 +533,17 @@
                 const botonReproducir = document.getElementById("btn-reproducir");
 
                 if (botonCorazon) {
-                    botonCorazon.classList.add('btn-visible');
+                    botonCorazon.style.display = "inline-block"; // Mostrar
+                    // Usamos setTimeout para aplicar la clase después de un pequeño retraso
+                    setTimeout(() => botonCorazon.classList.add('btn-visible'), 10);
                 } else {
                     console.error("No se encontró el elemento con ID 'btn-corazon'");
                 }
 
                 if (botonReproducir) {
-                    botonReproducir.classList.add('btn-visible');
+                    botonReproducir.style.display = "inline-block"; // Mostrar
+                    // Usamos setTimeout para aplicar la clase después de un pequeño retraso
+                    setTimeout(() => botonReproducir.classList.add('btn-visible'), 10);
                 } else {
                     console.error("No se encontró el elemento con ID 'btn-reproducir'");
                 }
@@ -578,21 +584,32 @@
             audio.style.display = "none";
             document.body.appendChild(audio);
 
-            audio.addEventListener('loadeddata', () => {
+            // Intentar reproducir el audio con un gesto del usuario (esto es crucial para iOS)
+            function intentarReproducir() {
                 audio.play()
                     .then(() => {
-                        console.log("Reproducción automática iniciada.");
+                        console.log("Reproducción automática iniciada (intento del usuario).");
                         audioInicialmenteReproducido = true;
+                        document.removeEventListener('click', intentarReproducir); // Eliminar el listener después de un intento exitoso
+                        document.removeEventListener('touchstart', intentarReproducir);
                     })
-                    .catch(error => console.error("Error al reproducir audio:", error));
+                    .catch(error => {
+                        console.error("Error al reproducir audio:", error);
+                        // No eliminar el listener aquí, podría necesitarse más tarde
+                    });
+            }
+
+            // Agregar listeners para 'click' y 'touchstart'
+            document.addEventListener('click', intentarReproducir);
+            document.addEventListener('touchstart', intentarReproducir);
+
+            audio.addEventListener('loadeddata', () => {
+                console.log("Audio cargado.");
             });
 
             audio.addEventListener('error', (error) => {
                 console.error("Error al cargar el audio:", error);
             });
-
-            // Mostrar los botones después de un pequeño retraso
-            setTimeout(mostrarBotones, 1000); // 1 segundo de retraso
 
             // Escuchar el evento de scroll para mostrar el botón al final
             window.addEventListener('scroll', mostrarBotonAlFinal);
