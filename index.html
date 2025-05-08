@@ -198,11 +198,17 @@
             display: inline-block;
         }
 
-        .btn-corazon,
-        .btn-reproducir {
+        .botones-container {
             position: fixed;
             bottom: 20px;
             right: 20px;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+        }
+
+        .btn-corazon,
+        .btn-reproducir {
             background-color: #ff66a3;
             color: white;
             font-size: 28px;
@@ -211,12 +217,9 @@
             text-decoration: none;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
             transition: transform 0.3s ease, background-color 0.3s ease, opacity 1s ease, transform 1s ease;
-            z-index: 1000;
             opacity: 0;
             transform: translateY(20px);
-            /* Inicialmente oculto y posicionado */
-            display: none;
-            /* Ocultar inicialmente */
+            display: none; /* Ocultar inicialmente */
         }
 
         .btn-corazon:hover,
@@ -226,8 +229,8 @@
         }
 
         .btn-reproducir {
-            bottom: 90px;
-            /* Ajusta la posición del botón de reproducción */
+            font-size: 24px;
+            margin-left: 10px;
         }
 
         .btn-visible {
@@ -336,11 +339,6 @@
             .mensaje-final {
                 margin-bottom: 100px;
             }
-
-            .btn-corazon,
-            .btn-reproducir {
-                display: none;
-            }
         }
     </style>
 </head>
@@ -352,8 +350,10 @@
         <button class="btn-loviu" onclick="mostrarContenido()">loviu^^</button>
     </div>
 
-    <a class="btn-corazon" id="btn-corazon" onclick="mostrarModalCollage()">❤️</a>
-    <div class="btn-reproducir" id="btn-reproducir" onclick="reproducirMusica()">🎶</div>
+    <div class="botones-container">
+        <a class="btn-corazon" id="btn-corazon" onclick="mostrarModalCollage()">❤️</a>
+        <a class="btn-reproducir" id="btn-reproducir" onclick="reproducirMusica()">🎶</a>
+    </div>
 
     <div class="contenido" id="contenido">
         <div class="mensaje">
@@ -539,16 +539,14 @@
 
                 if (botonCorazon) {
                     botonCorazon.style.display = "inline-block"; // Mostrar
-                    // Usamos setTimeout para aplicar la clase después de un pequeño retraso
-                    setTimeout(() => botonCorazon.classList.add('btn-visible'), 10);
+                    botonCorazon.classList.add('btn-visible');
                 } else {
                     console.error("No se encontró el elemento con ID 'btn-corazon'");
                 }
 
                 if (botonReproducir) {
                     botonReproducir.style.display = "inline-block"; // Mostrar
-                    // Usamos setTimeout para aplicar la clase después de un pequeño retraso
-                    setTimeout(() => botonReproducir.classList.add('btn-visible'), 10);
+                    botonReproducir.classList.add('btn-visible');
                 } else {
                     console.error("No se encontró el elemento con ID 'btn-reproducir'");
                 }
