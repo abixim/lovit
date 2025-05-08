@@ -219,7 +219,7 @@
             transition: transform 0.3s ease, background-color 0.3s ease, opacity 1s ease, transform 1s ease;
             opacity: 0;
             transform: translateY(20px);
-            display: none; /* Initially hidden */
+            display: none;
         }
 
         .btn-corazon:hover,
@@ -231,6 +231,7 @@
         .btn-reproducir {
             font-size: 24px;
             margin-left: 10px;
+            margin-right: 10px; /* Add right margin to separate the buttons */
         }
 
         .btn-visible {
@@ -241,36 +242,24 @@
         /* Estilos para el modal */
         .modal {
             display: none;
-            /* Hidden by default */
             position: fixed;
-            /* Stay in place */
             z-index: 1001;
-            /* Sit on top */
             left: 0;
             top: 0;
             width: 100%;
-            /* Full width */
             height: 100%;
-            /* Full height */
             overflow: auto;
-            /* Enable scroll if needed */
             background-color: rgba(0, 0, 0, 0.4);
-            /* Black w/ opacity */
-            /* Nuevos estilos para el color y la animación */
             background: linear-gradient(135deg, #ffd6e6, #ffe6f0);
             animation: fadeIn 1s ease, backgroundGradient 20s ease infinite;
         }
 
         .modal-content {
             background-color: transparent;
-            /* El contenido del modal será transparente */
             margin: 15% auto;
-            /* 15% from the top and centered */
             padding: 20px;
             border: none;
-            /* Sin borde */
             width: 80%;
-            /* Could be 80% or whatever you want */
             max-height: 80%;
             overflow: auto;
             position: relative;
@@ -309,7 +298,6 @@
             justify-content: center;
             align-items: center;
             gap: 15px;
-            /* padding: 20px;  Eliminado para que el collage se pegue al borde del modal */
         }
 
         .modal-collage img {
@@ -350,7 +338,7 @@
             <br>
             De: AB
         </h1>
-        <button class="btn-loviu" onclick="mostrarContenido()">🫶</button>
+        <button class="btn-loviu" onclick="mostrarContenido()">❤️</button>
     </div>
 
     <div class="botones-container">
