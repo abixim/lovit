@@ -12,7 +12,7 @@
             background-size: 400% 400%;
             animation: backgroundGradient 20s ease infinite;
             color: #4a0033;
-            font-family: Arial, sans-serif;
+            font-family: 'Times New Roman', Times, serif, sans-serif;
             font-size: 14px;
             font-weight: bold;
             font-style: italic;
@@ -220,6 +220,31 @@
             background-color: #ff3385;
         }
 
+        /* Estilos para el botón de reproducción */
+        .btn-reproducir {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #a366ff;
+            /* Otro color para diferenciarlo */
+            color: white;
+            font-size: 24px;
+            border-radius: 50%;
+            padding: 12px;
+            text-decoration: none;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            z-index: 1000;
+            cursor: pointer;
+            display: none;
+            /* Inicialmente oculto */
+        }
+
+        .btn-reproducir:hover {
+            transform: scale(1.2);
+            background-color: #8533ff;
+        }
+
         /* Estilos para el modal */
         .modal {
             display: none;
@@ -333,6 +358,7 @@
     </div>
 
     <a class="btn-corazon" id="btn-corazon" onclick="mostrarModalCollage()">❤️</a>
+    <div class="btn-reproducir" id="btn-reproducir" onclick="reproducirMusica()">🎶</div>
 
     <div class="contenido" id="contenido">
         <div class="mensaje">
@@ -345,9 +371,9 @@
             Más sin embargo, siempre superamos las cosas juntos porque de eso se trata. Si seguimos acá es porque grandes cosas nos esperan,
             nos faltan tantas cosas por hacer, tantas cosas planeadas por cumplir.
             Sos lo más lindo que la vida y Dios pudo poner en mi camino.
-            Te amo infinitamente, mi bella &lt;3
+            Te amo infinitamente, mi bella <3
             <br><br>
-            GIRL, I'M SO IN LOVE WITH YOU &hearts;
+            GIRL, I'M SO IN LOVE WITH YOU ♥
         </div>
 
         <div class="collage">
@@ -391,7 +417,7 @@
             Sos la luz de mis ojos y la alegría de mis días.
             <br><br>
 
-            Te obsequio este este album tan hermoso, uno de mis favirtos en la vida y tan significativo para mi. Cada que escucho este album me hace pensar en ti y la manera tan especial y pura en la que te amo, cada canción es una carta, un mensaje al amor y aunque yo siempre quiero demostrarte mi amor nunca puedo hacerlo de la mejor manera, este album me ayuda a poder expresar mis emociones y amor por ti, y aunque Mac de todas las canciones que conforman este precioso album solo dedicó una a Ariana, yo te dedicaría cada una de las canciones que conforman este album, este album tan precioso e increible como tu, eres música y yo amo la música<3
+            Te obsequio este album tan hermoso, uno de mis favoritos en la vida y tan significativo para mi. Cada que escucho este album me hace pensar en ti y la manera tan especial y pura en la que te amo, cada canción es una carta, un mensaje al amor y aunque yo siempre quiero demostrarte mi amor nunca puedo hacerlo de la mejor manera, este album me ayuda a poder expresar mis emociones y amor por ti, y aunque Mac de todas las canciones que conforman este precioso album solo dedicó una a Ariana, yo te dedicaría cada una de las canciones que conforman este album, este album tan precioso e increible como tu, eres música y yo amo la música<3
             <br><br>
             "VIVES EN MIS SUEÑOS, VIVES EN MI PRESENTE, VIVIRAS EN MI FUTURO, ESTANDO PRESENTE<3"
             <br><br>
@@ -405,22 +431,22 @@
                 </div>
                 <div style="margin-top: 20px;">
                     <a href="https://open.spotify.com/intl-es/album/6f6tko6NWoH00cyFOl4VYQ?si=ZAc7F7BATY-XF37BeSaIXA" target="_blank"
-                       style="color: #ff3399; font-size: 18px; font-style: italic; text-decoration: none;">
-                    ESTE ALBUM ES PARA TI LCO<3
+                        style="color: #ff3399; font-size: 18px; font-style: italic; text-decoration: none;">
+                        ESTE ALBUM ES PARA TI LCO<3
                     </a>
                 </div>
                 <br><br>
                 Sos el amor de mi vida.
                 Estoy completamente seguro de que Dios te puso en mi camino por una razón,
                 y no hay día que no agradezca por tenerte.
-                ¡Gracias por existir, mi amol! &lt;3
+                ¡Gracias por existir, mi amol! <3
             </div>
         </div>
     </div>
 
     <div id="myModal" class="modal">
         <div class="modal-content">
-            <span class="close">&times;</span>
+            <span class="close">×</span>
             <h2>¡NO ES LO QUE SIENTO POR TI, ES LO QUE NO SIENTO POR NADIE MÁS!❤️</h2>
             <div class="modal-collage">
                 <img src="IMG_1020.jpeg" alt="Extra 1">
@@ -430,15 +456,18 @@
             </div>
             <div style="margin-top: 20px;">
                 <a href="https://vm.tiktok.com/ZMBoSpRSW/" target="_blank"
-                   style="color: #ff3399; font-size: 18px; font-style: italic; text-decoration: none;">
+                    style="color: #ff3399; font-size: 18px; font-style: italic; text-decoration: none;">
                     PQ TEAMO <3
                 </a>
             </div>
-                        </div>
         </div>
     </div>
 
     <script>
+        // Variables globales
+        let audio;
+        let audioInicialmenteReproducido = false;
+
         // Función para mostrar el collage extra como un modal
         function mostrarModalCollage() {
             const modal = document.getElementById("myModal");
@@ -497,46 +526,84 @@
             }
         }
 
-        // Mostrar contenido principal
+        // Función para reproducir la música
+        function reproducirMusica() {
+            console.log("Función reproducirMusica() llamada.");
+            if (audio) {
+                audio.play().then(() => {
+                    console.log("Música reproduciéndose.");
+                }).catch(e => {
+                    console.error("Error al intentar reproducir la música:", e);
+                });
+            } else {
+                console.warn("Elemento de audio no inicializado.");
+            }
+        }
+
+        // Función principal para mostrar el contenido
         function mostrarContenido() {
             const bienvenida = document.getElementById("bienvenida");
             const contenido = document.getElementById("contenido");
             const botonCorazon = document.getElementById("btn-corazon");
+            const botonReproducir = document.getElementById("btn-reproducir");
 
+            console.log("Función mostrarContenido() llamada.");
 
+            // Ocultar la bienvenida
             if (bienvenida) {
                 bienvenida.style.display = "none";
+                console.log("Pantalla de bienvenida ocultada.");
             } else {
                 console.error("No se encontró el elemento con ID 'bienvenida'");
-                return; // Detener la función si no se encuentra el elemento principal
+                return;
             }
 
+            // Mostrar el contenido principal
             if (contenido) {
                 contenido.style.display = "block";
+                console.log("Contenido principal mostrado.");
             } else {
                 console.error("No se encontró el elemento con ID 'contenido'");
-                return; // Detener la función si no se encuentra el elemento principal
+                return;
             }
 
-
+            // Ocultar el botón de corazón inicialmente
             if (botonCorazon) {
-                botonCorazon.style.display = "none"; // Aseguramos que esté oculto al principio
+                botonCorazon.style.display = "none";
+                console.log("Botón de corazón inicialmente oculto.");
             }
 
+            // Mostrar el botón de reproducción
+            if (botonReproducir) {
+                botonReproducir.style.display = "inline-block";
+                console.log("Botón de reproducir música mostrado.");
+            } else {
+                console.error("No se encontró el elemento con ID 'btn-reproducir'");
+            }
 
-            const audio = document.createElement('audio');
+            // Crear y configurar el elemento de audio
+            audio = document.createElement('audio');
             audio.src = "Mac Miller - Congratulations Instrumental (VIOLIN & PIANO) ❦ - b.mp3";
             audio.loop = true;
-            audio.autoplay = true;
             audio.style.display = "none";
             document.body.appendChild(audio);
-            audio.play().catch(e => console.log("Audio bloqueado por el navegador:", e));
 
-            // Escuchar el evento de scroll para mostrar el botón al final
+            // Intentar reproducir la música después de que se cargue
+            audio.addEventListener('loadeddata', () => {
+                audio.play()
+                    .then(() => {
+                        console.log("Reproducción automática iniciada.");
+                        audioInicialmenteReproducido = true;
+                    })
+                    .catch(error => console.error("Error al reproducir audio:", error));
+            });
+
+            // Mostrar el botón de corazón al final del contenido
             window.addEventListener('scroll', mostrarBotonAlFinal);
+            console.log("EventListener para scroll agregado.");
         }
 
-        // Mostrar sorpresa final
+        // Función para mostrar la sorpresa final
         function mostrarSorpresa() {
             const sorpresa = document.getElementById("mensaje-sorpresa");
             if (sorpresa) {
