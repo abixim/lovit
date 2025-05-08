@@ -219,7 +219,7 @@
             transition: transform 0.3s ease, background-color 0.3s ease, opacity 1s ease, transform 1s ease;
             opacity: 0;
             transform: translateY(20px);
-            display: none; /* Ocultar inicialmente */
+            display: none; /* Initially hidden */
         }
 
         .btn-corazon:hover,
@@ -339,6 +339,11 @@
             .mensaje-final {
                 margin-bottom: 100px;
             }
+
+            .btn-corazon,
+            .btn-reproducir {
+                display: none;
+            }
         }
     </style>
 </head>
@@ -351,8 +356,8 @@
     </div>
 
     <div class="botones-container">
-        <a class="btn-corazon" id="btn-corazon" onclick="mostrarModalCollage()">❤️</a>
         <a class="btn-reproducir" id="btn-reproducir" onclick="reproducirMusica()">🎶</a>
+        <a class="btn-corazon" id="btn-corazon" onclick="mostrarModalCollage()">❤️</a>
     </div>
 
     <div class="contenido" id="contenido">
