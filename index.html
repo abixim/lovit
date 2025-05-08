@@ -210,13 +210,10 @@
             padding: 12px 16px;
             text-decoration: none;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-            transition: transform 0.3s ease, background-color 0.3s ease, opacity 1s ease, transform 1s ease;
+            transition: transform 0.3s ease, background-color 0.3s ease;
             z-index: 1000;
-            opacity: 0;
-            transform: translateY(20px);
-            /* Inicialmente oculto y posicionado */
             display: none;
-            /* Ocultar inicialmente */
+            /* Inicialmente oculto */
         }
 
         .btn-corazon:hover,
@@ -227,12 +224,6 @@
 
         .btn-reproducir {
             bottom: 90px;
-            /* Ajusta la posición del botón de reproducción */
-        }
-
-        .btn-visible {
-            opacity: 1;
-            transform: translateY(0);
         }
 
         /* Estilos para el modal */
@@ -335,6 +326,11 @@
 
             .mensaje-final {
                 margin-bottom: 100px;
+            }
+
+            .btn-corazon,
+            .btn-reproducir {
+                display: none; /* Ocultar botones en móviles */
             }
         }
     </style>
