@@ -336,6 +336,11 @@
             .mensaje-final {
                 margin-bottom: 100px;
             }
+
+            .btn-corazon,
+            .btn-reproducir {
+                display: none;
+            }
         }
     </style>
 </head>
@@ -347,10 +352,8 @@
         <button class="btn-loviu" onclick="mostrarContenido()">loviu^^</button>
     </div>
 
-    <div class="botones-container">
-        <a class="btn-corazon" id="btn-corazon" onclick="mostrarModalCollage()">❤️</a>
-        <a class="btn-reproducir" id="btn-reproducir" onclick="reproducirMusica()">🎶</a>
-    </div>
+    <a class="btn-corazon" id="btn-corazon" onclick="mostrarModalCollage()">❤️</a>
+    <div class="btn-reproducir" id="btn-reproducir" onclick="reproducirMusica()">🎶</div>
 
     <div class="contenido" id="contenido">
         <div class="mensaje">
@@ -536,14 +539,16 @@
 
                 if (botonCorazon) {
                     botonCorazon.style.display = "inline-block"; // Mostrar
-                    botonCorazon.classList.add('btn-visible');
+                    // Usamos setTimeout para aplicar la clase después de un pequeño retraso
+                    setTimeout(() => botonCorazon.classList.add('btn-visible'), 10);
                 } else {
                     console.error("No se encontró el elemento con ID 'btn-corazon'");
                 }
 
                 if (botonReproducir) {
                     botonReproducir.style.display = "inline-block"; // Mostrar
-                    botonReproducir.classList.add('btn-visible');
+                    // Usamos setTimeout para aplicar la clase después de un pequeño retraso
+                    setTimeout(() => botonReproducir.classList.add('btn-visible'), 10);
                 } else {
                     console.error("No se encontró el elemento con ID 'btn-reproducir'");
                 }
@@ -584,13 +589,27 @@
             audio.style.display = "none";
             document.body.appendChild(audio);
 
-            audio.addEventListener('loadeddata', () => {
+            // Intentar reproducir el audio con un gesto del usuario (esto es crucial para iOS)
+            function intentarReproducir() {
                 audio.play()
                     .then(() => {
-                        console.log("Reproducción automática iniciada.");
+                        console.log("Reproducción automática iniciada (intento del usuario).");
                         audioInicialmenteReproducido = true;
+                        document.removeEventListener('click', intentarReproducir); // Eliminar el listener después de un intento exitoso
+                        document.removeEventListener('touchstart', intentarReproducir);
                     })
-                    .catch(error => console.error("Error al reproducir audio:", error));
+                    .catch(error => {
+                        console.error("Error al reproducir audio:", error);
+                        // No eliminar el listener aquí, podría necesitarse más tarde
+                    });
+            }
+
+            // Agregar listeners para 'click' y 'touchstart'
+            document.addEventListener('click', intentarReproducir);
+            document.addEventListener('touchstart', intentarReproducir);
+
+            audio.addEventListener('loadeddata', () => {
+                console.log("Audio cargado.");
             });
 
             audio.addEventListener('error', (error) => {
