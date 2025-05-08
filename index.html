@@ -198,15 +198,11 @@
             display: inline-block;
         }
 
-        .botones-container {
-            width: 100%;
-            text-align: right;
-            margin-top: 20px;
-        }
-
         .btn-corazon,
         .btn-reproducir {
-            display: inline-block;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
             background-color: #ff66a3;
             color: white;
             font-size: 28px;
@@ -214,11 +210,13 @@
             padding: 12px 16px;
             text-decoration: none;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-            transition: transform 0.3s ease, background-color 0.3s ease;
+            transition: transform 0.3s ease, background-color 0.3s ease, opacity 1s ease, transform 1s ease;
             z-index: 1000;
-            position: absolute;
-            bottom: 20px;
-            right: 0;
+            opacity: 0;
+            transform: translateY(20px);
+            /* Inicialmente oculto y posicionado */
+            display: none;
+            /* Ocultar inicialmente */
         }
 
         .btn-corazon:hover,
@@ -228,8 +226,13 @@
         }
 
         .btn-reproducir {
-            margin-right: 10px;
             bottom: 90px;
+            /* Ajusta la posición del botón de reproducción */
+        }
+
+        .btn-visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         /* Estilos para el modal */
@@ -533,16 +536,14 @@
 
                 if (botonCorazon) {
                     botonCorazon.style.display = "inline-block"; // Mostrar
-                    // Usamos setTimeout para aplicar la clase después de un pequeño retraso
-                    setTimeout(() => botonCorazon.classList.add('btn-visible'), 10);
+                    botonCorazon.classList.add('btn-visible');
                 } else {
                     console.error("No se encontró el elemento con ID 'btn-corazon'");
                 }
 
                 if (botonReproducir) {
                     botonReproducir.style.display = "inline-block"; // Mostrar
-                    // Usamos setTimeout para aplicar la clase después de un pequeño retraso
-                    setTimeout(() => botonReproducir.classList.add('btn-visible'), 10);
+                    botonReproducir.classList.add('btn-visible');
                 } else {
                     console.error("No se encontró el elemento con ID 'btn-reproducir'");
                 }
@@ -583,27 +584,13 @@
             audio.style.display = "none";
             document.body.appendChild(audio);
 
-            // Intentar reproducir el audio con un gesto del usuario (esto es crucial para iOS)
-            function intentarReproducir() {
+            audio.addEventListener('loadeddata', () => {
                 audio.play()
                     .then(() => {
-                        console.log("Reproducción automática iniciada (intento del usuario).");
+                        console.log("Reproducción automática iniciada.");
                         audioInicialmenteReproducido = true;
-                        document.removeEventListener('click', intentarReproducir); // Eliminar el listener después de un intento exitoso
-                        document.removeEventListener('touchstart', intentarReproducir);
                     })
-                    .catch(error => {
-                        console.error("Error al reproducir audio:", error);
-                        // No eliminar el listener aquí, podría necesitarse más tarde
-                    });
-            }
-
-            // Agregar listeners para 'click' y 'touchstart'
-            document.addEventListener('click', intentarReproducir);
-            document.addEventListener('touchstart', intentarReproducir);
-
-            audio.addEventListener('loadeddata', () => {
-                console.log("Audio cargado.");
+                    .catch(error => console.error("Error al reproducir audio:", error));
             });
 
             audio.addEventListener('error', (error) => {
