@@ -339,11 +339,6 @@
             .mensaje-final {
                 margin-bottom: 100px;
             }
-
-            .btn-corazon,
-            .btn-reproducir {
-                display: none;
-            }
         }
     </style>
 </head>
@@ -366,8 +361,8 @@
             Cada canción es una carta al amor, cada canción es linda y transmite un lindo mensaje.
             Te amo tanto mi bella, espero lo disfrutes.
             <br><br>
-            Hace que recuerde cada momento bello que hemos compartido juntos, cada día, cada abrazo, cada beso.
-            Todo lo lindo que hemos hecho juntos y así como hemos pasado momentos hermosos en su mayoría, también hemos pasado momentos difíciles.
+            Cuando escucho este album me hace recordar cada momento bello que hemos compartido juntos, cada día, cada abrazo, cada beso.
+            Todo lo lindo que hemos hecho juntos y así como hemos hecho tantas cosas lindos y hemos pasado momentos hermosos en su mayoría, también hemos pasado momentos difíciles.
             Más sin embargo, siempre superamos las cosas juntos porque de eso se trata. Si seguimos acá es porque grandes cosas nos esperan,
             nos faltan tantas cosas por hacer, tantas cosas planeadas por cumplir.
             Sos lo más lindo que la vida y Dios pudo poner en mi camino.
@@ -419,7 +414,7 @@
 
             Te obsequio este album tan hermoso, uno de mis favoritos en la vida y tan significativo para mi. Cada que escucho este album me hace pensar en ti y la manera tan especial y pura en la que te amo, cada canción es una carta, un mensaje al amor y aunque yo siempre quiero demostrarte mi amor nunca puedo hacerlo de la mejor manera, este album me ayuda a poder expresar mis emociones y amor por ti, y aunque Mac de todas las canciones que conforman este precioso album solo dedicó una a Ariana, yo te dedicaría cada una de las canciones que conforman este album, este album tan precioso e increible como tu, eres música y yo amo la música<3
             <br><br>
-            "VIVES EN MIS SUEÑOS, VIVES EN MI PRESENTE, VIVIRAS EN MI FUTURO, ESTANDO PRESENTE<3"
+            "VIVES EN MIS SUEÑOS, VIVES en MI PRESENTE, VIVIRAS EN MI FUTURO, ESTANDO PRESENTE<3"
             <br><br>
             GRACIAS POR TANTO Y PERDÓN POR TAN POCO, TE AMO INFINITAMENTE ♥
             <br><br>
@@ -544,14 +539,16 @@
 
                 if (botonCorazon) {
                     botonCorazon.style.display = "inline-block"; // Mostrar
-                    botonCorazon.classList.add('btn-visible');
+                    // Usamos setTimeout para aplicar la clase después de un pequeño retraso
+                    setTimeout(() => botonCorazon.classList.add('btn-visible'), 10);
                 } else {
                     console.error("No se encontró el elemento con ID 'btn-corazon'");
                 }
 
                 if (botonReproducir) {
                     botonReproducir.style.display = "inline-block"; // Mostrar
-                    botonReproducir.classList.add('btn-visible');
+                    // Usamos setTimeout para aplicar la clase después de un pequeño retraso
+                    setTimeout(() => botonReproducir.classList.add('btn-visible'), 10);
                 } else {
                     console.error("No se encontró el elemento con ID 'btn-reproducir'");
                 }
